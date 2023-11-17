@@ -4,10 +4,13 @@ import com.senai.mobili.dtos.UsuarioDto;
 import com.senai.mobili.models.UsuarioModel;
 import com.senai.mobili.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
+//import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -20,6 +23,7 @@ import java.util.UUID;
 public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
+
 
     @GetMapping
     public ResponseEntity<List<UsuarioModel>> listarUsuarios() {
@@ -45,6 +49,7 @@ public class UsuarioController {
         UsuarioModel novoUsuario = new UsuarioModel();
         BeanUtils.copyProperties(usuario, novoUsuario);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuario));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioRepository.save(usuario));
     }
 }
+
